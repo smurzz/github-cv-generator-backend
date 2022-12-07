@@ -1,29 +1,26 @@
 package com.example.githubcvgenerator.controller;
 
-import java.net.URI;
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpResponse;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.method.support.ModelAndViewContainer;
-
-import reactor.core.publisher.Mono;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.ServerResponse;
 
 @RestController
 public class IndexController {
 
-	@GetMapping("")
-	public Mono<String> hello(Model model){
-
-        return Mono.just("index");
-   }
-	
-//	@GetMapping("/")
-//	Mono<Void> redirect(ServerHttpResponse response) {
-//	  response.setStatusCode(HttpStatus.TEMPORARY_REDIRECT);
-//	  response.getHeaders().setLocation(URI.create("http://localhost:3000"));
-//	  return response.setComplete();
-//	}
+	@SuppressWarnings("deprecation")
+	@Bean
+	public RouterFunction<ServerResponse> htmlRouter(
+	  @Value("classpath:/static/index.html") Resource html) {
+	    return route(GET(""), request
+	      -> ok().contentType(MediaType.TEXT_HTML).syncBody(html)
+	    );
+	}
 }
