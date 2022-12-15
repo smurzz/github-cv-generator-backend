@@ -149,9 +149,9 @@ public class Resume {
 	public HashMap<String, Double> languagesPerc(List<Repo> repos) {
 		
 		HashMap<String, Double> languages = new HashMap<String, Double>();
-		double onePers = (1.0 / Double.valueOf(repos.size())) * 100.0;
+		double onePers = (1.0 / (double) repos.size()) * 100.0;
 		for (int i = 0; i < repos.size(); i++) {
-			if (repos.get(i).getLanguage() == null || repos.get(i).getLanguage() == "") {
+			if (repos.get(i).getLanguage() == null || repos.get(i).getLanguage().equals("")) {
 				languages.put("Others", languages.containsKey("Others") ? (languages.get("Others") + onePers) : onePers);
 			} else {
 				languages.put(repos.get(i).getLanguage(),

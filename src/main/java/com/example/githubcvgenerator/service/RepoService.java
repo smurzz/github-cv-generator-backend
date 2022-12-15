@@ -37,11 +37,11 @@ public class RepoService {
 		return ownerMono.flatMapMany(owner -> {
 			int numOfPublicRepos = owner.getPublicRepos();
 			String login = owner.getLogin();
-			Integer numOfPages = (int) (Math.ceil(Double.valueOf(numOfPublicRepos / 30.0)));
+			int numOfPages = (int) (Math.ceil(numOfPublicRepos / 30.0));
 			Long[] pages = new Long[numOfPages];
 
 			for (int page = 1; page <= numOfPages; page++) {
-				pages[page - 1] = Long.valueOf(page);
+				pages[page - 1] = (long) page;
 			}
 			return Flux.fromArray(pages)
 					.parallel()
