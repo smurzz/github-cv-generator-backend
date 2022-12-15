@@ -18,6 +18,8 @@
 		<node.version>v16.14.0</node.version> <!-- 16.14.0 -->
 		<yarn.version>v1.16.0</yarn.version> <!-- 1.16.0 -->
 		<frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version> <!-- 1.12.1 -->
+		<sonar.organization>sonarcloud-scan-test2</sonar.organization>
+  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<dependencies>
